@@ -2346,20 +2346,31 @@
 
         // Initialize with Supabase
         async function init() {
-            // Try to load from Supabase first
-            const remoteData = await loadFromSupabase();
-            if (remoteData && remoteData.tables && remoteData.tables.length > 0) {
-                state.tables = remoteData.tables;
-                state.guests = remoteData.guests || defaultState.guests;
-                state.groups = remoteData.groups || defaultState.groups;
-                state.zoom = remoteData.zoom || 1;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
-            } else {
-                initializeTables();
+            // First, ensure we have tables initialized
+            initializeTables();
+
+            // Then try to load from Supabase
+            try {
+                const remoteData = await loadFromSupabase();
+                if (remoteData && remoteData.tables && remoteData.tables.length > 0) {
+                    state.tables = remoteData.tables;
+                    state.guests = remoteData.guests || defaultState.guests;
+                    state.groups = remoteData.groups || defaultState.groups;
+                    state.zoom = remoteData.zoom || 1;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+                }
+            } catch (e) {
+                console.log('Using local data, Supabase sync will retry later');
             }
 
             renderAll();
-            subscribeToChanges();
+
+            // Subscribe to realtime changes
+            try {
+                subscribeToChanges();
+            } catch (e) {
+                console.log('Realtime subscription failed, will use local storage only');
+            }
         }
 
         init();
