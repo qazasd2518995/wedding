@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婚宴座位規劃系統</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --champagne: #D4AF37;
+            --champagne-light: #F5E6C4;
+            --champagne-pale: #FDF8F0;
+            --rose-gold: #B76E79;
+            --sage: #9CAF88;
+            --dusty-blue: #A4B8C4;
+            --lavender: #B4A7D6;
+            --peach: #FFCBA4;
+            --ivory: #FFFFF0;
+            --charcoal: #36454F;
+            --warm-gray: #8B8589;
+            --shadow: rgba(139, 133, 137, 0.15);
+            --shadow-hover: rgba(139, 133, 137, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background: linear-gradient(135deg, var(--champagne-pale) 0%, var(--ivory) 50%, #FFF9F0 100%);
+            min-height: 100vh;
+            color: var(--charcoal);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, var(--champagne) 0%, var(--rose-gold) 100%);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: white;
+            letter-spacing: 0.1em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            font-family: 'Noto Serif TC', serif;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--champagne);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background: white;
+            box-shadow: 4px 0 20px var(--shadow);
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-section {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--champagne-light);
+        }
+
+        .sidebar-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--champagne);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Guest Groups */
+        .group-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .group-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--champagne-pale);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .group-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .group-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .group-info {
+            flex: 1;
+        }
+
+        .group-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .group-count {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+        }
+
+        .add-group-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px dashed var(--champagne-light);
+            background: transparent;
+            border-radius: 10px;
+            color: var(--warm-gray);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .add-group-btn:hover {
+            border-color: var(--champagne);
+            color: var(--champagne);
+            background: var(--champagne-pale);
+        }
+
+        /* Guest List */
+        .guest-search {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--champagne-light);
+            border-radius: 25px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .guest-search:focus {
+            outline: none;
+            border-color: var(--champagne);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .guest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .guest-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            background: var(--champagne-pale);
+            border-radius: 8px;
+            cursor: grab;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .guest-item:hover {
+            background: var(--champagne-light);
+        }
+
+        .guest-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .guest-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .guest-table {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+            margin-left: auto;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--champagne-pale) 0%, white 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--champagne-light);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--champagne);
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+        }
+
+        /* Floor Plan */
+        .floor-plan-container {
+            flex: 1;
+            overflow: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .floor-plan {
+            position: relative;
+            width: 900px;
+            height: 1400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Venue Elements */
+        .venue-element {
+            position: absolute;
+            background: var(--warm-gray);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .floor-window {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 40px;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            border-radius: 0 0 10px 10px;
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.1);
+        }
+
+        .floor-window::before {
+            content: '落地窗';
+            color: var(--charcoal);
+            font-size: 0.85rem;
+        }
+
+        .arch-door {
+            top: 420px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 30px;
+            background: linear-gradient(90deg, transparent 0%, var(--champagne-light) 20%, var(--champagne-light) 80%, transparent 100%);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arch-door::before {
+            content: '微拱門';
+            color: var(--warm-gray);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+        }
+
+        .pillar {
+            width: 30px;
+            height: 30px;
+            background: var(--warm-gray);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .pillar-1 { top: 410px; left: 40px; }
+        .pillar-2 { top: 410px; right: 40px; }
+        .pillar-3 { top: 1050px; right: 40px; }
+
+        .second-floor-entrance {
+            top: 480px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8B7355 0%, #A0826D 100%);
+            border-radius: 10px;
+            writing-mode: vertical-rl;
+            font-size: 0.85rem;
+        }
+
+        .workstation {
+            top: 580px;
+            left: 30px;
+            width: 80px;
+            height: 60px;
+            background: linear-gradient(135deg, #708090 0%, #8B9DA8 100%);
+            border-radius: 10px;
+            writing-mode: vertical-rl;
+            font-size: 0.85rem;
+        }
+
+        .food-exit {
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--sage) 0%, #B8C9A0 100%);
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        /* Tables */
+        .table-group {
+            position: absolute;
+            cursor: move;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .table-group:hover {
+            z-index: 100;
+        }
+
+        .table-group.dragging {
+            opacity: 0.8;
+            z-index: 1000;
+        }
+
+        .table {
+            position: relative;
+            background: white;
+            border: 3px solid var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .table:hover {
+            border-color: var(--champagne);
+            box-shadow: 0 5px 20px var(--shadow-hover);
+        }
+
+        .table.selected {
+            border-color: var(--champagne);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Rectangle table (D tables) */
+        .table-rect {
+            width: 100px;
+            height: 60px;
+            border-radius: 8px;
+        }
+
+        /* Large rectangle table (Q tables) */
+        .table-large {
+            width: 80px;
+            height: 120px;
+            border-radius: 8px;
+        }
+
+        /* Small rectangle (F tables) */
+        .table-small {
+            width: 80px;
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        /* Seats */
+        .seat {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 2px solid var(--rose-gold);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .seat:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+
+        .seat.occupied {
+            border-width: 3px;
+        }
+
+        .seat.drop-target {
+            border-color: var(--champagne);
+            background: var(--champagne-light);
+            box-shadow: 0 0 10px var(--champagne);
+        }
+
+        .seat-tooltip {
+            position: absolute;
+            bottom: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--charcoal);
+            color: white;
+            padding: 0.4rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .seat:hover .seat-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Table name edit */
+        .table-name-input {
+            position: absolute;
+            width: 60px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+
+        .table-name-input:focus {
+            outline: none;
+            background: var(--champagne-pale);
+            border-radius: 4px;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(54, 69, 79, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--champagne);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--champagne-light);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--champagne);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.selected {
+            border-color: var(--charcoal);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel {
+            background: var(--champagne-pale);
+            color: var(--charcoal);
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--rose-gold) 100%);
+            color: white;
+        }
+
+        /* Zoom Controls */
+        .zoom-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px var(--shadow);
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            transition: all 0.2s ease;
+        }
+
+        .zoom-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: fixed;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px var(--shadow-hover);
+            padding: 0.5rem 0;
+            min-width: 180px;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: all 0.2s ease;
+        }
+
+        .context-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .context-menu-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background 0.2s ease;
+        }
+
+        .context-menu-item:hover {
+            background: var(--champagne-pale);
+        }
+
+        .context-menu-item.danger {
+            color: #D9534F;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--champagne-pale);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--champagne-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--champagne);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 280px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header, .sidebar, .zoom-controls {
+                display: none;
+            }
+            .floor-plan-container {
+                padding: 0;
+            }
+            .floor-plan {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>✧ 婚宴座位規劃 ✧</h1>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="exportData()">
+                <span>📤</span> 匯出
+            </button>
+            <button class="btn btn-secondary" onclick="importData()">
+                <span>📥</span> 匯入
+            </button>
+            <button class="btn btn-primary" onclick="window.print()">
+                <span>🖨️</span> 列印
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <!-- Stats Section -->
+            <div class="sidebar-section">
+                <h3>📊 統計總覽</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-guests">0</div>
+                        <div class="stat-label">已安排賓客</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-seats">0</div>
+                        <div class="stat-label">總座位數</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-tables">17</div>
+                        <div class="stat-label">桌數</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="empty-seats">0</div>
+                        <div class="stat-label">空位</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guest Groups -->
+            <div class="sidebar-section">
+                <h3>🎨 賓客分組</h3>
+                <div class="group-list" id="group-list">
+                    <!-- Groups will be rendered here -->
+                </div>
+                <button class="add-group-btn" onclick="showAddGroupModal()">+ 新增分組</button>
+            </div>
+
+            <!-- Guest List -->
+            <div class="sidebar-section">
+                <h3>👥 賓客名單</h3>
+                <input type="text" class="guest-search" placeholder="搜尋賓客..." id="guest-search" oninput="filterGuests()">
+                <div class="guest-list" id="guest-list">
+                    <!-- Guests will be rendered here -->
+                </div>
+                <button class="add-group-btn" style="margin-top: 0.75rem;" onclick="showAddGuestModal()">+ 新增賓客</button>
+            </div>
+        </aside>
+
+        <main class="floor-plan-container" id="floor-plan-container">
+            <div class="floor-plan" id="floor-plan">
+                <!-- Venue Elements -->
+                <div class="venue-element floor-window"></div>
+                <div class="venue-element arch-door"></div>
+                <div class="venue-element pillar pillar-1">柱</div>
+                <div class="venue-element pillar pillar-2">柱</div>
+                <div class="venue-element pillar pillar-3">柱</div>
+                <div class="venue-element second-floor-entrance">二樓門口</div>
+                <div class="venue-element workstation">工作台</div>
+                <div class="venue-element food-exit">出餐口</div>
+
+                <!-- Tables will be rendered by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Zoom Controls -->
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()">+</button>
+        <button class="zoom-btn" onclick="zoomOut()">−</button>
+        <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+    </div>
+
+    <!-- Add Group Modal -->
+    <div class="modal-overlay" id="add-group-modal">
+        <div class="modal">
+            <h2>新增賓客分組</h2>
+            <input type="text" class="modal-input" id="group-name-input" placeholder="分組名稱（如：男方親友）">
+            <div class="color-picker" id="color-picker">
+                <!-- Colors will be rendered here -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeModal('add-group-modal')">取消</button>
+                <button class="btn btn-confirm" onclick="addGroup()">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Guest Modal -->
+    <div class="modal-overlay" id="add-guest-modal">
+        <div class="modal">
+            <h2>新增賓客</h2>
+            <input type="text" class="modal-input" id="guest-name-input" placeholder="賓客姓名">
+            <select class="modal-input" id="guest-group-select">
+                <!-- Options will be rendered here -->
+            </select>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeModal('add-guest-modal')">取消</button>
+                <button class="btn btn-confirm" onclick="addGuest()">確認</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Seat Modal -->
+    <div class="modal-overlay" id="edit-seat-modal">
+        <div class="modal">
+            <h2>編輯座位</h2>
+            <input type="text" class="modal-input" id="seat-guest-input" placeholder="賓客姓名">
+            <select class="modal-input" id="seat-group-select">
+                <!-- Options will be rendered here -->
+            </select>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeModal('edit-seat-modal')">取消</button>
+                <button class="btn btn-cancel" onclick="clearSeat()" style="color: #D9534F;">清除</button>
+                <button class="btn btn-confirm" onclick="saveSeat()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="context-menu">
+        <div class="context-menu-item" onclick="editTableName()">✏️ 編輯桌名</div>
+        <div class="context-menu-item" onclick="duplicateTable()">📋 複製桌子</div>
+        <div class="context-menu-item danger" onclick="clearTable()">🗑️ 清空座位</div>
+    </div>
+
+    <script>
+        // Data State
+        let state = {
+            groups: [
+                { id: 1, name: '男方親友', color: '#B76E79' },
+                { id: 2, name: '女方親友', color: '#9CAF88' },
+                { id: 3, name: '男方同事', color: '#A4B8C4' },
+                { id: 4, name: '女方同事', color: '#B4A7D6' },
+                { id: 5, name: '共同好友', color: '#FFCBA4' }
+            ],
+            guests: [],
+            tables: [],
+            selectedTable: null,
+            selectedSeat: null,
+            zoom: 1
+        };
+
+        const colors = ['#B76E79', '#9CAF88', '#A4B8C4', '#B4A7D6', '#FFCBA4', '#E6B8AF', '#D5A6BD', '#C9DAF8', '#B6D7A8', '#FFE599'];
+
+        // Initialize tables based on the floor plan
+        function initializeTables() {
+            state.tables = [
+                // D Zone (top section)
+                { id: 'D1', name: 'D1', x: 100, y: 80, type: 'rect', seats: createSeats(6, 'rect'), zone: 'D' },
+                { id: 'D2', name: 'D2', x: 100, y: 220, type: 'rect', seats: createSeats(6, 'rect'), zone: 'D' },
+                { id: 'D3', name: 'D3', x: 550, y: 80, type: 'rect', seats: createSeats(6, 'rect'), zone: 'D' },
+                { id: 'D4', name: 'D4', x: 550, y: 220, type: 'rect', seats: createSeats(6, 'rect'), zone: 'D' },
+
+                // Q Zone (left side, below arch)
+                { id: 'Q1', name: 'Q1', x: 140, y: 680, type: 'large', seats: createSeats(6, 'large'), zone: 'Q' },
+                { id: 'Q2', name: 'Q2', x: 140, y: 820, type: 'large', seats: createSeats(6, 'large'), zone: 'Q' },
+                { id: 'Q3', name: 'Q3', x: 140, y: 980, type: 'large', seats: createSeats(6, 'large'), zone: 'Q' },
+                { id: 'Q4', name: 'Q4', x: 140, y: 1120, type: 'large', seats: createSeats(6, 'large'), zone: 'Q' },
+                { id: 'Q5', name: 'Q5', x: 140, y: 1260, type: 'large', seats: createSeats(6, 'large'), zone: 'Q' },
+
+                // F Zone (right side)
+                { id: 'F1', name: 'F1', x: 550, y: 500, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F2', name: 'F2', x: 550, y: 600, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F3', name: 'F3', x: 550, y: 700, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F4', name: 'F4', x: 550, y: 850, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F5', name: 'F5', x: 550, y: 950, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F6', name: 'F6', x: 550, y: 1050, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F7', name: 'F7', x: 550, y: 1150, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F8', name: 'F8', x: 550, y: 1250, type: 'small', seats: createSeats(4, 'small'), zone: 'F' }
+            ];
+        }
+
+        function createSeats(count, type) {
+            const seats = [];
+            for (let i = 0; i < count; i++) {
+                seats.push({ id: i, guest: null, groupId: null });
+            }
+            return seats;
+        }
+
+        function getSeatPositions(type) {
+            switch(type) {
+                case 'rect':
+                    return [
+                        { x: -20, y: -50 }, { x: 30, y: -50 }, { x: 80, y: -50 },
+                        { x: -20, y: 60 }, { x: 30, y: 60 }, { x: 80, y: 60 }
+                    ];
+                case 'large':
+                    return [
+                        { x: -40, y: 10 }, { x: -40, y: 55 }, { x: -40, y: 100 },
+                        { x: 88, y: 10 }, { x: 88, y: 55 }, { x: 88, y: 100 }
+                    ];
+                case 'small':
+                    return [
+                        { x: -40, y: 10 }, { x: -40, y: 50 },
+                        { x: 88, y: 10 }, { x: 88, y: 50 }
+                    ];
+                default:
+                    return [];
+            }
+        }
+
+        // Render Functions
+        function renderGroups() {
+            const container = document.getElementById('group-list');
+            container.innerHTML = state.groups.map(group => {
+                const count = state.guests.filter(g => g.groupId === group.id).length;
+                return `
+                    <div class="group-item" onclick="filterByGroup(${group.id})">
+                        <div class="group-color" style="background: ${group.color}"></div>
+                        <div class="group-info">
+                            <div class="group-name">${group.name}</div>
+                            <div class="group-count">${count} 人</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderGuests(filter = '') {
+            const container = document.getElementById('guest-list');
+            let guests = state.guests;
+
+            if (filter) {
+                guests = guests.filter(g => g.name.includes(filter));
+            }
+
+            container.innerHTML = guests.map(guest => {
+                const group = state.groups.find(g => g.id === guest.groupId);
+                const table = guest.tableId ? state.tables.find(t => t.id === guest.tableId) : null;
+                return `
+                    <div class="guest-item" draggable="true"
+                         ondragstart="dragGuest(event, ${guest.id})"
+                         ondragend="dragEnd(event)">
+                        <div class="guest-dot" style="background: ${group ? group.color : '#ccc'}"></div>
+                        <span>${guest.name}</span>
+                        <span class="guest-table">${table ? table.name : '未安排'}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderTables() {
+            const floorPlan = document.getElementById('floor-plan');
+
+            // Remove existing tables
+            document.querySelectorAll('.table-group').forEach(el => el.remove());
+
+            state.tables.forEach(table => {
+                const tableGroup = document.createElement('div');
+                tableGroup.className = 'table-group';
+                tableGroup.id = `table-${table.id}`;
+                tableGroup.style.left = `${table.x}px`;
+                tableGroup.style.top = `${table.y}px`;
+
+                // Table element
+                const tableEl = document.createElement('div');
+                tableEl.className = `table table-${table.type}`;
+                tableEl.onclick = (e) => selectTable(table.id, e);
+                tableEl.oncontextmenu = (e) => showContextMenu(e, table.id);
+
+                const nameInput = document.createElement('input');
+                nameInput.type = 'text';
+                nameInput.className = 'table-name-input';
+                nameInput.value = table.name;
+                nameInput.onchange = (e) => updateTableName(table.id, e.target.value);
+                nameInput.onclick = (e) => e.stopPropagation();
+
+                tableEl.appendChild(nameInput);
+                tableGroup.appendChild(tableEl);
+
+                // Seats
+                const positions = getSeatPositions(table.type);
+                table.seats.forEach((seat, index) => {
+                    const seatEl = document.createElement('div');
+                    seatEl.className = 'seat' + (seat.guest ? ' occupied' : '');
+                    seatEl.style.left = `${positions[index].x}px`;
+                    seatEl.style.top = `${positions[index].y}px`;
+
+                    if (seat.guest) {
+                        const group = state.groups.find(g => g.id === seat.groupId);
+                        seatEl.style.borderColor = group ? group.color : '#B76E79';
+                        seatEl.style.background = group ? `${group.color}20` : 'white';
+                        seatEl.innerHTML = `
+                            <span style="font-size: 0.55rem; padding: 2px;">${seat.guest.substring(0, 2)}</span>
+                            <div class="seat-tooltip">${seat.guest}</div>
+                        `;
+                    }
+
+                    seatEl.onclick = (e) => {
+                        e.stopPropagation();
+                        editSeat(table.id, seat.id);
+                    };
+
+                    seatEl.ondragover = (e) => e.preventDefault();
+                    seatEl.ondragenter = (e) => {
+                        e.preventDefault();
+                        seatEl.classList.add('drop-target');
+                    };
+                    seatEl.ondragleave = () => seatEl.classList.remove('drop-target');
+                    seatEl.ondrop = (e) => dropGuest(e, table.id, seat.id);
+
+                    tableGroup.appendChild(seatEl);
+                });
+
+                // Make table draggable
+                makeTableDraggable(tableGroup, table.id);
+
+                floorPlan.appendChild(tableGroup);
+            });
+
+            updateStats();
+        }
+
+        function makeTableDraggable(element, tableId) {
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+
+            element.addEventListener('mousedown', (e) => {
+                if (e.target.tagName === 'INPUT') return;
+
+                isDragging = true;
+                element.classList.add('dragging');
+
+                startX = e.clientX;
+                startY = e.clientY;
+
+                const table = state.tables.find(t => t.id === tableId);
+                initialX = table.x;
+                initialY = table.y;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+
+                const dx = (e.clientX - startX) / state.zoom;
+                const dy = (e.clientY - startY) / state.zoom;
+
+                const table = state.tables.find(t => t.id === tableId);
+                table.x = initialX + dx;
+                table.y = initialY + dy;
+
+                element.style.left = `${table.x}px`;
+                element.style.top = `${table.y}px`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    element.classList.remove('dragging');
+                }
+            });
+        }
+
+        // Guest Drag & Drop
+        function dragGuest(e, guestId) {
+            e.dataTransfer.setData('guestId', guestId);
+            e.target.classList.add('dragging');
+        }
+
+        function dragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function dropGuest(e, tableId, seatId) {
+            e.preventDefault();
+            e.target.classList.remove('drop-target');
+
+            const guestId = parseInt(e.dataTransfer.getData('guestId'));
+            const guest = state.guests.find(g => g.id === guestId);
+
+            if (guest) {
+                // Remove from previous seat
+                if (guest.tableId) {
+                    const prevTable = state.tables.find(t => t.id === guest.tableId);
+                    if (prevTable) {
+                        const prevSeat = prevTable.seats.find(s => s.guest === guest.name);
+                        if (prevSeat) {
+                            prevSeat.guest = null;
+                            prevSeat.groupId = null;
+                        }
+                    }
+                }
+
+                // Add to new seat
+                const table = state.tables.find(t => t.id === tableId);
+                const seat = table.seats.find(s => s.id === seatId);
+
+                seat.guest = guest.name;
+                seat.groupId = guest.groupId;
+                guest.tableId = tableId;
+                guest.seatId = seatId;
+
+                renderTables();
+                renderGuests();
+            }
+        }
+
+        // Modal Functions
+        function showAddGroupModal() {
+            renderColorPicker('color-picker');
+            document.getElementById('group-name-input').value = '';
+            document.getElementById('add-group-modal').classList.add('active');
+        }
+
+        function showAddGuestModal() {
+            renderGroupSelect('guest-group-select');
+            document.getElementById('guest-name-input').value = '';
+            document.getElementById('add-guest-modal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function renderColorPicker(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = colors.map((color, index) => `
+                <div class="color-option ${index === 0 ? 'selected' : ''}"
+                     style="background: ${color}"
+                     onclick="selectColor(this, '${color}')"></div>
+            `).join('');
+        }
+
+        function selectColor(el, color) {
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            el.dataset.color = color;
+        }
+
+        function renderGroupSelect(selectId) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = '<option value="">選擇分組</option>' +
+                state.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+        }
+
+        function addGroup() {
+            const name = document.getElementById('group-name-input').value;
+            const colorEl = document.querySelector('.color-option.selected');
+            const color = colorEl ? colorEl.style.background : colors[0];
+
+            if (name) {
+                state.groups.push({
+                    id: Date.now(),
+                    name,
+                    color
+                });
+                renderGroups();
+                closeModal('add-group-modal');
+            }
+        }
+
+        function addGuest() {
+            const name = document.getElementById('guest-name-input').value;
+            const groupId = parseInt(document.getElementById('guest-group-select').value);
+
+            if (name) {
+                state.guests.push({
+                    id: Date.now(),
+                    name,
+                    groupId: groupId || null,
+                    tableId: null,
+                    seatId: null
+                });
+                renderGuests();
+                renderGroups();
+                closeModal('add-guest-modal');
+            }
+        }
+
+        // Seat Editing
+        function editSeat(tableId, seatId) {
+            state.selectedTable = tableId;
+            state.selectedSeat = seatId;
+
+            const table = state.tables.find(t => t.id === tableId);
+            const seat = table.seats.find(s => s.id === seatId);
+
+            renderGroupSelect('seat-group-select');
+            document.getElementById('seat-guest-input').value = seat.guest || '';
+            document.getElementById('seat-group-select').value = seat.groupId || '';
+            document.getElementById('edit-seat-modal').classList.add('active');
+        }
+
+        function saveSeat() {
+            const name = document.getElementById('seat-guest-input').value;
+            const groupId = parseInt(document.getElementById('seat-group-select').value);
+
+            const table = state.tables.find(t => t.id === state.selectedTable);
+            const seat = table.seats.find(s => s.id === state.selectedSeat);
+
+            // Check if guest exists
+            let guest = state.guests.find(g => g.name === name);
+
+            if (name && !guest) {
+                // Create new guest
+                guest = {
+                    id: Date.now(),
+                    name,
+                    groupId: groupId || null,
+                    tableId: state.selectedTable,
+                    seatId: state.selectedSeat
+                };
+                state.guests.push(guest);
+            } else if (guest) {
+                // Update existing guest
+                if (guest.tableId && guest.tableId !== state.selectedTable) {
+                    // Remove from previous seat
+                    const prevTable = state.tables.find(t => t.id === guest.tableId);
+                    if (prevTable) {
+                        const prevSeat = prevTable.seats.find(s => s.guest === guest.name);
+                        if (prevSeat) {
+                            prevSeat.guest = null;
+                            prevSeat.groupId = null;
+                        }
+                    }
+                }
+                guest.tableId = state.selectedTable;
+                guest.seatId = state.selectedSeat;
+                if (groupId) guest.groupId = groupId;
+            }
+
+            seat.guest = name || null;
+            seat.groupId = groupId || null;
+
+            renderTables();
+            renderGuests();
+            renderGroups();
+            closeModal('edit-seat-modal');
+        }
+
+        function clearSeat() {
+            const table = state.tables.find(t => t.id === state.selectedTable);
+            const seat = table.seats.find(s => s.id === state.selectedSeat);
+
+            if (seat.guest) {
+                const guest = state.guests.find(g => g.name === seat.guest);
+                if (guest) {
+                    guest.tableId = null;
+                    guest.seatId = null;
+                }
+            }
+
+            seat.guest = null;
+            seat.groupId = null;
+
+            renderTables();
+            renderGuests();
+            closeModal('edit-seat-modal');
+        }
+
+        // Table Functions
+        function selectTable(tableId, e) {
+            e.stopPropagation();
+            document.querySelectorAll('.table').forEach(t => t.classList.remove('selected'));
+            const tableEl = document.querySelector(`#table-${tableId} .table`);
+            if (tableEl) tableEl.classList.add('selected');
+            state.selectedTable = tableId;
+        }
+
+        function updateTableName(tableId, newName) {
+            const table = state.tables.find(t => t.id === tableId);
+            if (table) {
+                table.name = newName;
+            }
+        }
+
+        // Context Menu
+        function showContextMenu(e, tableId) {
+            e.preventDefault();
+            state.selectedTable = tableId;
+
+            const menu = document.getElementById('context-menu');
+            menu.style.left = `${e.clientX}px`;
+            menu.style.top = `${e.clientY}px`;
+            menu.classList.add('active');
+        }
+
+        function hideContextMenu() {
+            document.getElementById('context-menu').classList.remove('active');
+        }
+
+        function editTableName() {
+            const table = state.tables.find(t => t.id === state.selectedTable);
+            const input = document.querySelector(`#table-${table.id} .table-name-input`);
+            if (input) {
+                input.focus();
+                input.select();
+            }
+            hideContextMenu();
+        }
+
+        function clearTable() {
+            const table = state.tables.find(t => t.id === state.selectedTable);
+            table.seats.forEach(seat => {
+                if (seat.guest) {
+                    const guest = state.guests.find(g => g.name === seat.guest);
+                    if (guest) {
+                        guest.tableId = null;
+                        guest.seatId = null;
+                    }
+                }
+                seat.guest = null;
+                seat.groupId = null;
+            });
+            renderTables();
+            renderGuests();
+            hideContextMenu();
+        }
+
+        function duplicateTable() {
+            const original = state.tables.find(t => t.id === state.selectedTable);
+            const newTable = {
+                ...original,
+                id: `${original.id}-copy-${Date.now()}`,
+                name: `${original.name}-副本`,
+                x: original.x + 50,
+                y: original.y + 50,
+                seats: original.seats.map(s => ({ ...s, id: s.id, guest: null, groupId: null }))
+            };
+            state.tables.push(newTable);
+            renderTables();
+            hideContextMenu();
+        }
+
+        // Zoom Functions
+        function zoomIn() {
+            state.zoom = Math.min(state.zoom + 0.1, 2);
+            applyZoom();
+        }
+
+        function zoomOut() {
+            state.zoom = Math.max(state.zoom - 0.1, 0.5);
+            applyZoom();
+        }
+
+        function resetZoom() {
+            state.zoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const floorPlan = document.getElementById('floor-plan');
+            floorPlan.style.transform = `scale(${state.zoom})`;
+            floorPlan.style.transformOrigin = 'top left';
+        }
+
+        // Filter Functions
+        function filterGuests() {
+            const search = document.getElementById('guest-search').value;
+            renderGuests(search);
+        }
+
+        function filterByGroup(groupId) {
+            // Highlight guests in this group
+            const guests = state.guests.filter(g => g.groupId === groupId);
+            // Could add visual highlighting here
+        }
+
+        // Stats
+        function updateStats() {
+            let totalSeats = 0;
+            let occupiedSeats = 0;
+
+            state.tables.forEach(table => {
+                totalSeats += table.seats.length;
+                occupiedSeats += table.seats.filter(s => s.guest).length;
+            });
+
+            document.getElementById('total-guests').textContent = occupiedSeats;
+            document.getElementById('total-seats').textContent = totalSeats;
+            document.getElementById('total-tables').textContent = state.tables.length;
+            document.getElementById('empty-seats').textContent = totalSeats - occupiedSeats;
+        }
+
+        // Export/Import
+        function exportData() {
+            const data = JSON.stringify(state, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '婚宴座位表.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        state = { ...state, ...data };
+                        renderAll();
+                    } catch (err) {
+                        alert('檔案格式錯誤');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Initialize
+        function renderAll() {
+            renderGroups();
+            renderGuests();
+            renderTables();
+        }
+
+        // Event Listeners
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.context-menu')) {
+                hideContextMenu();
+            }
+            if (!e.target.closest('.table')) {
+                document.querySelectorAll('.table').forEach(t => t.classList.remove('selected'));
+            }
+        });
+
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+                hideContextMenu();
+            }
+        });
+
+        // Initialize on load
+        initializeTables();
+        renderAll();
+    </script>
+</body>
+</html>
