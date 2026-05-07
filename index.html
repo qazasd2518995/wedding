@@ -1143,6 +1143,10 @@
                 <svg class="icon"><use href="#icon-image"/></svg>
                 <span>Export Image</span>
             </button>
+            <button class="btn btn-ghost" onclick="resetData()" style="border-color: rgba(255,100,100,0.4); color: #fca5a5;">
+                <svg class="icon"><use href="#icon-reset"/></svg>
+                <span>Reset</span>
+            </button>
         </div>
     </header>
 
@@ -1301,13 +1305,52 @@
         // Default state
         const defaultState = {
             groups: [
-                { id: 1, name: '男方親友', color: '#B76E79' },
-                { id: 2, name: '女方親友', color: '#40916C' },
-                { id: 3, name: '男方同事', color: '#5B8FB9' },
-                { id: 4, name: '女方同事', color: '#9B7EBD' },
-                { id: 5, name: '共同好友', color: '#D4A373' }
+                { id: 1, name: 'Mina 賓客', color: '#40916C' },
+                { id: 2, name: 'Justin 賓客', color: '#5B8FB9' }
             ],
-            guests: [],
+            guests: [
+                // Mina 賓客 (22人)
+                { id: 101, name: '鄭惟', groupId: 1, tableId: null, seatId: null },
+                { id: 102, name: '鄭惟男友', groupId: 1, tableId: null, seatId: null },
+                { id: 103, name: '耐現', groupId: 1, tableId: null, seatId: null },
+                { id: 104, name: '子涵', groupId: 1, tableId: null, seatId: null },
+                { id: 105, name: '潘郁婷', groupId: 1, tableId: null, seatId: null },
+                { id: 106, name: 'Lisa', groupId: 1, tableId: null, seatId: null },
+                { id: 107, name: '映潔', groupId: 1, tableId: null, seatId: null },
+                { id: 108, name: '玟京', groupId: 1, tableId: null, seatId: null },
+                { id: 109, name: '若語', groupId: 1, tableId: null, seatId: null },
+                { id: 110, name: '何姵君', groupId: 1, tableId: null, seatId: null },
+                { id: 111, name: '何姵君男友', groupId: 1, tableId: null, seatId: null },
+                { id: 112, name: '朱阡毓', groupId: 1, tableId: null, seatId: null },
+                { id: 113, name: '阿魂', groupId: 1, tableId: null, seatId: null },
+                { id: 114, name: '君美', groupId: 1, tableId: null, seatId: null },
+                { id: 115, name: '子誼', groupId: 1, tableId: null, seatId: null },
+                { id: 116, name: 'Kiki', groupId: 1, tableId: null, seatId: null },
+                { id: 117, name: '怡如', groupId: 1, tableId: null, seatId: null },
+                { id: 118, name: '霈芸', groupId: 1, tableId: null, seatId: null },
+                { id: 119, name: '謝璿', groupId: 1, tableId: null, seatId: null },
+                { id: 120, name: 'Polin', groupId: 1, tableId: null, seatId: null },
+                { id: 121, name: '靜慈', groupId: 1, tableId: null, seatId: null },
+                { id: 122, name: '汶茹', groupId: 1, tableId: null, seatId: null },
+                // Justin 賓客 (17人)
+                { id: 201, name: 'Vincent', groupId: 2, tableId: null, seatId: null },
+                { id: 202, name: 'Daniel', groupId: 2, tableId: null, seatId: null },
+                { id: 203, name: '哥', groupId: 2, tableId: null, seatId: null },
+                { id: 204, name: '伍', groupId: 2, tableId: null, seatId: null },
+                { id: 205, name: '陳子維', groupId: 2, tableId: null, seatId: null },
+                { id: 206, name: '陳傑楊', groupId: 2, tableId: null, seatId: null },
+                { id: 207, name: '薛', groupId: 2, tableId: null, seatId: null },
+                { id: 208, name: '芊涵', groupId: 2, tableId: null, seatId: null },
+                { id: 209, name: '謝凱萱', groupId: 2, tableId: null, seatId: null },
+                { id: 210, name: '鐘丙辰', groupId: 2, tableId: null, seatId: null },
+                { id: 211, name: '翁子婷', groupId: 2, tableId: null, seatId: null },
+                { id: 212, name: '吳盡城', groupId: 2, tableId: null, seatId: null },
+                { id: 213, name: 'Phoebe', groupId: 2, tableId: null, seatId: null },
+                { id: 214, name: '王元凱', groupId: 2, tableId: null, seatId: null },
+                { id: 215, name: '李遠任', groupId: 2, tableId: null, seatId: null },
+                { id: 216, name: '翁女友', groupId: 2, tableId: null, seatId: null },
+                { id: 217, name: '李明洋', groupId: 2, tableId: null, seatId: null }
+            ],
             tables: [],
             selectedTable: null,
             selectedSeat: null,
@@ -1324,7 +1367,22 @@
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    return { ...defaultState, ...parsed };
+                    // Always use default groups and guests, but keep seat assignments
+                    const result = { ...defaultState };
+                    result.tables = parsed.tables || [];
+                    result.zoom = parsed.zoom || 1;
+
+                    // Restore seat assignments from saved data
+                    if (parsed.guests && parsed.guests.length > 0) {
+                        result.guests = defaultState.guests.map(defaultGuest => {
+                            const savedGuest = parsed.guests.find(g => g.name === defaultGuest.name);
+                            if (savedGuest) {
+                                return { ...defaultGuest, tableId: savedGuest.tableId, seatId: savedGuest.seatId };
+                            }
+                            return defaultGuest;
+                        });
+                    }
+                    return result;
                 }
             } catch (e) {
                 console.error('Failed to load state:', e);
@@ -1903,6 +1961,14 @@
             document.getElementById('total-seats').textContent = totalSeats;
             document.getElementById('total-tables').textContent = state.tables.length;
             document.getElementById('empty-seats').textContent = totalSeats - occupiedSeats;
+        }
+
+        // Reset all data
+        function resetData() {
+            if (confirm('確定要重置所有資料嗎？這會清除所有座位安排並重新載入預設賓客名單。')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
         }
 
         function renderAll() {
