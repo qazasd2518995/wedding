@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --gold: #C9A962;
@@ -1058,6 +1059,241 @@
         .sidebar-section:nth-child(1) { animation-delay: 0.1s; }
         .sidebar-section:nth-child(2) { animation-delay: 0.2s; }
         .sidebar-section:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Mobile Toggle Button */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+            border: none;
+            color: var(--gold-light);
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 4px 20px rgba(27, 67, 50, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto;
+            }
+
+            .header {
+                padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .header-brand {
+                gap: 0.5rem;
+            }
+
+            .header-logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .header-logo svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .header h1 {
+                font-size: 1rem;
+                letter-spacing: 0.1em;
+            }
+
+            .header h1 span {
+                display: none;
+            }
+
+            .header-actions {
+                gap: 0.5rem;
+            }
+
+            .header-actions .save-indicator span {
+                display: none;
+            }
+
+            .btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+
+            .btn span {
+                display: none;
+            }
+
+            .btn .icon {
+                margin: 0;
+            }
+
+            .main-container {
+                flex-direction: column;
+                height: auto;
+                min-height: calc(100vh - 60px);
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                border-right: none;
+                border-bottom: 1px solid var(--gold-light);
+            }
+
+            .sidebar.open {
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            .sidebar-section {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+
+            .stat-card {
+                padding: 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.25rem;
+            }
+
+            .stat-label {
+                font-size: 0.6rem;
+            }
+
+            .group-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+
+            .group-item {
+                padding: 0.5rem 0.75rem;
+                flex: 0 0 auto;
+            }
+
+            .group-info .group-count {
+                display: none;
+            }
+
+            .guest-list {
+                max-height: 150px;
+            }
+
+            .guest-item {
+                padding: 0.5rem 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .add-btn {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .floor-plan-container {
+                padding: 1rem;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .floor-plan {
+                width: 700px;
+                height: 1100px;
+                transform-origin: top left;
+            }
+
+            .zoom-controls {
+                bottom: 1.5rem;
+                right: 1rem;
+            }
+
+            .zoom-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Smaller seats on mobile */
+            .seat {
+                width: 40px;
+                height: 40px;
+            }
+
+            .seat-text {
+                font-size: 0.55rem;
+            }
+
+            .table-small {
+                width: 70px;
+                height: 45px;
+            }
+
+            .table-tiny {
+                width: 55px;
+                height: 38px;
+            }
+
+            .table-name-input {
+                font-size: 0.8rem;
+                width: 45px;
+            }
+
+            .context-menu {
+                min-width: 150px;
+            }
+
+            .context-menu-item {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 0.85rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .floor-plan {
+                width: 600px;
+                height: 950px;
+            }
+
+            .seat {
+                width: 35px;
+                height: 35px;
+            }
+
+            .seat-text {
+                font-size: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1120,6 +1356,12 @@
             <symbol id="icon-reset" viewBox="0 0 24 24">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M3 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24">
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </symbol>
         </defs>
     </svg>
@@ -1243,6 +1485,11 @@
         </button>
     </div>
 
+    <!-- Mobile Toggle Button -->
+    <button class="mobile-toggle" onclick="toggleSidebar()" id="mobile-toggle">
+        <svg class="icon-lg"><use href="#icon-menu"/></svg>
+    </button>
+
     <!-- Add Group Modal -->
     <div class="modal-overlay" id="add-group-modal">
         <div class="modal">
@@ -1300,7 +1547,13 @@
     </div>
 
     <script>
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://symrvnbybcncqbfpynkc.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5bXJ2bmJ5YmNuY3FiZnB5bmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMDY2MTcsImV4cCI6MjA4ODc4MjYxN30.9QDdhTbJAhmJcKVvkQyWjiT4IUNKZ4XV4AQF5h2tvR4';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         const STORAGE_KEY = 'wedding-seating-planner-data';
+        let isSyncing = false;
 
         // Default state
         const defaultState = {
@@ -1399,8 +1652,79 @@
                     zoom: state.zoom
                 };
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+                // Also save to Supabase
+                saveToSupabase(toSave);
             } catch (e) {
                 console.error('Failed to save state:', e);
+            }
+        }
+
+        // Supabase sync functions
+        async function saveToSupabase(data) {
+            if (isSyncing) return;
+            try {
+                await supabase
+                    .from('seating_data')
+                    .upsert({ id: 'main', data: data, updated_at: new Date().toISOString() });
+            } catch (e) {
+                console.error('Supabase save error:', e);
+            }
+        }
+
+        async function loadFromSupabase() {
+            try {
+                const { data, error } = await supabase
+                    .from('seating_data')
+                    .select('data')
+                    .eq('id', 'main')
+                    .single();
+
+                if (error) throw error;
+                if (data && data.data && Object.keys(data.data).length > 0) {
+                    return data.data;
+                }
+            } catch (e) {
+                console.error('Supabase load error:', e);
+            }
+            return null;
+        }
+
+        function subscribeToChanges() {
+            supabase
+                .channel('seating_changes')
+                .on('postgres_changes', {
+                    event: '*',
+                    schema: 'public',
+                    table: 'seating_data'
+                }, (payload) => {
+                    if (payload.new && payload.new.data) {
+                        isSyncing = true;
+                        const remoteData = payload.new.data;
+
+                        // Merge remote data
+                        if (remoteData.tables) state.tables = remoteData.tables;
+                        if (remoteData.guests) state.guests = remoteData.guests;
+                        if (remoteData.groups) state.groups = remoteData.groups;
+
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+                        renderAll();
+
+                        // Show sync indicator
+                        showSyncNotification();
+
+                        setTimeout(() => { isSyncing = false; }, 100);
+                    }
+                })
+                .subscribe();
+        }
+
+        function showSyncNotification() {
+            const indicator = document.querySelector('.save-indicator span');
+            if (indicator) {
+                indicator.textContent = 'Synced!';
+                setTimeout(() => {
+                    indicator.textContent = 'Auto-saved';
+                }, 2000);
             }
         }
 
@@ -1971,6 +2295,19 @@
             }
         }
 
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggle = document.getElementById('mobile-toggle');
+            sidebar.classList.toggle('open');
+
+            if (sidebar.classList.contains('open')) {
+                toggle.innerHTML = '<svg class="icon-lg"><use href="#icon-close"/></svg>';
+            } else {
+                toggle.innerHTML = '<svg class="icon-lg"><use href="#icon-menu"/></svg>';
+            }
+        }
+
         function renderAll() {
             renderGroups();
             renderGuests();
@@ -2002,9 +2339,25 @@
         // Save before unload
         window.addEventListener('beforeunload', saveState);
 
-        // Initialize
-        initializeTables();
-        renderAll();
+        // Initialize with Supabase
+        async function init() {
+            // Try to load from Supabase first
+            const remoteData = await loadFromSupabase();
+            if (remoteData && remoteData.tables && remoteData.tables.length > 0) {
+                state.tables = remoteData.tables;
+                state.guests = remoteData.guests || defaultState.guests;
+                state.groups = remoteData.groups || defaultState.groups;
+                state.zoom = remoteData.zoom || 1;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+            } else {
+                initializeTables();
+            }
+
+            renderAll();
+            subscribeToChanges();
+        }
+
+        init();
     </script>
 </body>
 </html>
