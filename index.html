@@ -599,24 +599,26 @@
         .second-floor-entrance {
             top: 480px;
             left: 35px;
-            width: 75px;
-            height: 75px;
+            width: 40px;
+            height: 90px;
             background: linear-gradient(145deg, var(--emerald) 0%, var(--emerald-light) 100%);
             border-radius: 8px;
             writing-mode: vertical-rl;
+            white-space: nowrap;
             color: var(--gold-light);
             font-size: 0.8rem;
             box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
         }
 
         .workstation {
-            top: 575px;
+            top: 590px;
             left: 35px;
-            width: 75px;
-            height: 55px;
+            width: 40px;
+            height: 65px;
             background: linear-gradient(145deg, #64748B 0%, #475569 100%);
             border-radius: 8px;
             writing-mode: vertical-rl;
+            white-space: nowrap;
             color: var(--ivory);
             font-size: 0.8rem;
             box-shadow: 0 4px 15px rgba(71, 85, 105, 0.3);
@@ -1550,7 +1552,7 @@
         // Supabase Configuration
         const SUPABASE_URL = 'https://symrvnbybcncqbfpynkc.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5bXJ2bmJ5YmNuY3FiZnB5bmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyMDY2MTcsImV4cCI6MjA4ODc4MjYxN30.9QDdhTbJAhmJcKVvkQyWjiT4IUNKZ4XV4AQF5h2tvR4';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         const STORAGE_KEY = 'wedding-seating-planner-data';
         let isSyncing = false;
@@ -1663,7 +1665,7 @@
         async function saveToSupabase(data) {
             if (isSyncing) return;
             try {
-                await supabase
+                await db
                     .from('seating_data')
                     .upsert({ id: 'main', data: data, updated_at: new Date().toISOString() });
             } catch (e) {
@@ -1673,7 +1675,7 @@
 
         async function loadFromSupabase() {
             try {
-                const { data, error } = await supabase
+                const { data, error } = await db
                     .from('seating_data')
                     .select('data')
                     .eq('id', 'main')
@@ -1690,7 +1692,7 @@
         }
 
         function subscribeToChanges() {
-            supabase
+            db
                 .channel('seating_changes')
                 .on('postgres_changes', {
                     event: '*',
