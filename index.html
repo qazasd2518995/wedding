@@ -1798,15 +1798,15 @@
                 { id: 'Q4', name: 'Q4', x: 160, y: 930, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'Q' },
                 { id: 'Q5', name: 'Q5', x: 160, y: 1120, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'Q' },
 
-                // F Zone - F1-F3 橫向, F4-F5 併桌直立, F6 橫向, F7-F8 併桌直立
+                // F Zone - F1,F4,F5,F8 四人座, F2,F3,F6,F7 兩人座
                 { id: 'F1', name: 'F1', x: 620, y: 500, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F2', name: 'F2', x: 620, y: 590, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F3', name: 'F3', x: 620, y: 680, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F4', name: 'F4', x: 640, y: 820, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' },
-                { id: 'F5', name: 'F5', x: 640, y: 930, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' },
-                { id: 'F6', name: 'F6', x: 620, y: 1090, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F7', name: 'F7', x: 640, y: 1210, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' },
-                { id: 'F8', name: 'F8', x: 640, y: 1320, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' }
+                { id: 'F2', name: 'F2', x: 620, y: 590, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
+                { id: 'F3', name: 'F3', x: 620, y: 660, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
+                { id: 'F4', name: 'F4', x: 640, y: 800, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' },
+                { id: 'F5', name: 'F5', x: 640, y: 910, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' },
+                { id: 'F6', name: 'F6', x: 620, y: 1070, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
+                { id: 'F7', name: 'F7', x: 620, y: 1200, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
+                { id: 'F8', name: 'F8', x: 640, y: 1290, type: 'vertical', seats: createSeats(4, 'vertical'), zone: 'F' }
             ];
             autoSave();
         }
