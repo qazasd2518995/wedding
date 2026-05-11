@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" width="800" height="1200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 1200" width="580" height="1200">
   <defs>
     <!-- 漸層背景 -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -27,23 +27,7 @@
       <stop offset="100%" style="stop-color:#2D6A4F"/>
     </linearGradient>
 
-    <!-- Mina賓客顏色 -->
-    <linearGradient id="minaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#40916C"/>
-      <stop offset="100%" style="stop-color:#52B788"/>
-    </linearGradient>
-
-    <!-- Justin賓客顏色 -->
-    <linearGradient id="justinGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#5B8FB9"/>
-      <stop offset="100%" style="stop-color:#7FB3D5"/>
-    </linearGradient>
-
     <!-- 陰影 -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
-    </filter>
-
     <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.1"/>
     </filter>
@@ -55,285 +39,286 @@
   </defs>
 
   <!-- 背景 -->
-  <rect width="800" height="1200" fill="url(#bgGradient)"/>
-  <rect width="800" height="1200" fill="url(#floralPattern)"/>
+  <rect width="580" height="1200" fill="url(#bgGradient)"/>
+  <rect width="580" height="1200" fill="url(#floralPattern)"/>
 
   <!-- 裝飾邊框 -->
-  <rect x="15" y="15" width="770" height="1170" fill="none" stroke="#C9A962" stroke-width="1" opacity="0.5" rx="10"/>
-  <rect x="20" y="20" width="760" height="1160" fill="none" stroke="#C9A962" stroke-width="2" rx="8"/>
+  <rect x="15" y="15" width="550" height="1170" fill="none" stroke="#C9A962" stroke-width="1" opacity="0.5" rx="10"/>
+  <rect x="20" y="20" width="540" height="1160" fill="none" stroke="#C9A962" stroke-width="2" rx="8"/>
 
   <!-- 角落裝飾 -->
   <path d="M30 30 L30 70 M30 30 L70 30" stroke="#C9A962" stroke-width="2" fill="none"/>
-  <path d="M770 30 L770 70 M770 30 L730 30" stroke="#C9A962" stroke-width="2" fill="none"/>
+  <path d="M550 30 L550 70 M550 30 L510 30" stroke="#C9A962" stroke-width="2" fill="none"/>
   <path d="M30 1170 L30 1130 M30 1170 L70 1170" stroke="#C9A962" stroke-width="2" fill="none"/>
-  <path d="M770 1170 L770 1130 M770 1170 L730 1170" stroke="#C9A962" stroke-width="2" fill="none"/>
+  <path d="M550 1170 L550 1130 M550 1170 L510 1170" stroke="#C9A962" stroke-width="2" fill="none"/>
 
   <!-- ========== 標題區域 ========== -->
-  <text x="400" y="55" text-anchor="middle" font-family="serif" font-size="24" fill="#1B4332" letter-spacing="8">SEATING CHART</text>
-  <text x="400" y="78" text-anchor="middle" font-family="serif" font-size="12" fill="#64748B" letter-spacing="3">Wedding Reception</text>
+  <text x="290" y="55" text-anchor="middle" font-family="serif" font-size="22" fill="#1B4332" letter-spacing="6">SEATING CHART</text>
+  <text x="290" y="75" text-anchor="middle" font-family="serif" font-size="11" fill="#64748B" letter-spacing="2">Wedding Reception</text>
 
   <!-- ========== 落地窗 ========== -->
-  <rect x="150" y="95" width="500" height="35" rx="0" ry="0" fill="url(#windowGradient)" filter="url(#softShadow)"/>
-  <rect x="150" y="95" width="500" height="35" fill="none" stroke="#87CEEB" stroke-width="1"/>
-  <text x="400" y="118" text-anchor="middle" font-family="serif" font-size="14" fill="#1B4332">落地窗</text>
+  <rect x="80" y="95" width="420" height="32" rx="0" ry="0" fill="url(#windowGradient)" filter="url(#softShadow)"/>
+  <rect x="80" y="95" width="420" height="32" fill="none" stroke="#87CEEB" stroke-width="1"/>
+  <text x="290" y="116" text-anchor="middle" font-family="serif" font-size="13" fill="#1B4332">落地窗</text>
 
   <!-- ========== D區 (只保留D3, D4) ========== -->
 
   <!-- D3 桌 -->
-  <g transform="translate(480, 150)">
-    <rect x="0" y="0" width="70" height="50" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="35" y="30" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">D3</text>
+  <g transform="translate(360, 145)">
+    <rect x="0" y="0" width="60" height="45" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="13" fill="#2C2C2C" font-weight="500">D3</text>
     <!-- 座位 -->
-    <rect x="-45" y="3" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="-45" y="27" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="75" y="3" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="75" y="27" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="3" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="24" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="65" y="3" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="65" y="24" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
   </g>
 
   <!-- D4 桌 -->
-  <g transform="translate(480, 220)">
-    <rect x="0" y="0" width="70" height="50" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="35" y="30" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">D4</text>
+  <g transform="translate(360, 210)">
+    <rect x="0" y="0" width="60" height="45" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="30" y="28" text-anchor="middle" font-family="serif" font-size="13" fill="#2C2C2C" font-weight="500">D4</text>
     <!-- 座位 -->
-    <rect x="-45" y="3" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="-45" y="27" width="40" height="20" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="75" y="3" width="40" height="20" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="95" y="18" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">伍</text>
-    <rect x="75" y="27" width="40" height="20" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="95" y="42" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">哥</text>
+    <rect x="-40" y="3" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="24" width="35" height="18" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="65" y="3" width="35" height="18" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="82" y="16" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">伍</text>
+    <rect x="65" y="24" width="35" height="18" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="82" y="37" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">哥</text>
   </g>
 
   <!-- ========== 柱子 (微拱門兩側) ========== -->
-  <rect x="60" y="300" width="25" height="25" rx="3" fill="#64748B" filter="url(#softShadow)"/>
-  <text x="72" y="317" text-anchor="middle" font-family="serif" font-size="10" fill="white">柱</text>
+  <rect x="95" y="285" width="22" height="22" rx="3" fill="#64748B" filter="url(#softShadow)"/>
+  <text x="106" y="300" text-anchor="middle" font-family="serif" font-size="9" fill="white">柱</text>
 
-  <rect x="715" y="300" width="25" height="25" rx="3" fill="#64748B" filter="url(#softShadow)"/>
-  <text x="727" y="317" text-anchor="middle" font-family="serif" font-size="10" fill="white">柱</text>
+  <rect x="463" y="285" width="22" height="22" rx="3" fill="#64748B" filter="url(#softShadow)"/>
+  <text x="474" y="300" text-anchor="middle" font-family="serif" font-size="9" fill="white">柱</text>
 
   <!-- ========== 微拱門 ========== -->
-  <line x1="150" y1="312" x2="650" y2="312" stroke="url(#goldGradient)" stroke-width="2"/>
-  <text x="400" y="308" text-anchor="middle" font-family="serif" font-size="12" fill="#8B7332">微拱門</text>
+  <line x1="120" y1="296" x2="460" y2="296" stroke="url(#goldGradient)" stroke-width="2"/>
+  <text x="290" y="290" text-anchor="middle" font-family="serif" font-size="11" fill="#8B7332">微拱門</text>
 
   <!-- ========== 二樓門口 ========== -->
-  <rect x="45" y="350" width="35" height="70" rx="5" fill="url(#emeraldGradient)" filter="url(#softShadow)"/>
-  <text x="62" y="375" text-anchor="middle" font-family="serif" font-size="10" fill="#E8D5A3" writing-mode="tb">二樓門口</text>
+  <rect x="50" y="330" width="32" height="60" rx="4" fill="url(#emeraldGradient)" filter="url(#softShadow)"/>
+  <text x="66" y="352" text-anchor="middle" font-family="serif" font-size="9" fill="#E8D5A3" writing-mode="tb">二樓門口</text>
 
   <!-- ========== 工作台 ========== -->
-  <rect x="45" y="435" width="35" height="55" rx="5" fill="#64748B" filter="url(#softShadow)"/>
-  <text x="62" y="455" text-anchor="middle" font-family="serif" font-size="10" fill="white" writing-mode="tb">工作台</text>
+  <rect x="50" y="400" width="32" height="48" rx="4" fill="#64748B" filter="url(#softShadow)"/>
+  <text x="66" y="418" text-anchor="middle" font-family="serif" font-size="9" fill="white" writing-mode="tb">工作台</text>
 
   <!-- ========== Q區 ========== -->
 
   <!-- Q1 桌 (直立4人) -->
-  <g transform="translate(130, 510)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">Q1</text>
+  <g transform="translate(145, 470)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">Q1</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="22" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">Phoebe</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">吳進誠</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">趙雨情</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">吳進誠</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="18" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">翁梓庭</text>
-    <text x="75" y="30" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">女友</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">翁梓庭</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="18" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">翁梓庭</text>
+    <text x="67" y="28" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">親友</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">翁梓庭</text>
   </g>
 
   <!-- Q2 桌 (直立4人) -->
-  <g transform="translate(130, 605)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">Q2</text>
+  <g transform="translate(145, 555)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">Q2</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">李遠任</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">鍾秉辰</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">李遠任</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">鍾秉辰</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">王元楷</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">李明洋</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">王元楷</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">李明洋</text>
   </g>
 
   <!-- Q3 桌 (直立4人) -->
-  <g transform="translate(130, 750)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">Q3</text>
+  <g transform="translate(145, 690)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">Q3</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">怡如</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">子誼</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">怡如</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">子誼</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">靜慈</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">汶茹</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">靜慈</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">汶茹</text>
   </g>
 
   <!-- Q4 桌 (直立4人) -->
-  <g transform="translate(130, 845)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">Q4</text>
+  <g transform="translate(145, 775)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">Q4</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">阿魂</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">Polin</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">阿魂</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">子綾</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">君美</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">君美</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
   </g>
 
   <!-- Q5 桌 (直立4人) -->
-  <g transform="translate(130, 1000)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">Q5</text>
+  <g transform="translate(145, 910)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">Q5</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">子涵</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">耐現</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">子涵</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">耐現</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">鄭惟</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="63" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">鄭惟</text>
-    <text x="75" y="75" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">男友</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">鄭惟</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="55" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">鄭惟</text>
+    <text x="67" y="66" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">親友</text>
   </g>
 
   <!-- ========== F區 ========== -->
 
   <!-- F1 桌 (直立4人) -->
-  <g transform="translate(605, 360)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F1</text>
+  <g transform="translate(390, 340)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F1</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">Kiki</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">若語</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">泳琦</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">若語</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">謝璿</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">霈芸</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">謝璿</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">霈芸</text>
   </g>
 
   <!-- F2 桌 (2人座) -->
-  <g transform="translate(605, 465)">
-    <rect x="0" y="0" width="50" height="40" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="25" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F2</text>
+  <g transform="translate(390, 435)">
+    <rect x="0" y="0" width="45" height="35" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="22" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F2</text>
     <!-- 座位 -->
-    <rect x="-45" y="5" width="40" height="30" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="24" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">何姵君</text>
-    <rect x="55" y="5" width="40" height="30" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="17" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">何姵君</text>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">男友</text>
+    <rect x="-40" y="4" width="35" height="27" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">何姵君</text>
+    <rect x="50" y="4" width="35" height="27" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="14" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">何姵君</text>
+    <text x="67" y="24" text-anchor="middle" font-family="sans-serif" font-size="7" fill="white">親友</text>
   </g>
 
   <!-- F3 桌 (2人座) -->
-  <g transform="translate(605, 520)">
-    <rect x="0" y="0" width="50" height="40" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="25" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F3</text>
+  <g transform="translate(390, 485)">
+    <rect x="0" y="0" width="45" height="35" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="22" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F3</text>
     <!-- 座位 -->
-    <rect x="-45" y="5" width="40" height="30" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="24" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">謝愷軒</text>
-    <rect x="55" y="5" width="40" height="30" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="4" width="35" height="27" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">謝愷軒</text>
+    <rect x="50" y="4" width="35" height="27" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
   </g>
 
   <!-- 柱子 (F3-F4之間) -->
-  <rect x="715" y="575" width="25" height="25" rx="3" fill="#64748B" filter="url(#softShadow)"/>
-  <text x="727" y="592" text-anchor="middle" font-family="serif" font-size="10" fill="white">柱</text>
+  <rect x="478" y="530" width="22" height="22" rx="3" fill="#64748B" filter="url(#softShadow)"/>
+  <text x="489" y="545" text-anchor="middle" font-family="serif" font-size="9" fill="white">柱</text>
 
   <!-- F4 桌 (直立4人) -->
-  <g transform="translate(605, 615)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F4</text>
+  <g transform="translate(390, 565)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F4</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">映潔</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">Lisa</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">映潔</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">亭媛</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">玟京</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">潘郁婷</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">玟京</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">潘郁婷</text>
   </g>
 
   <!-- F5 桌 (直立4人) - 新人桌 -->
-  <g transform="translate(605, 710)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#C9A962" stroke-width="2" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#C9A962" font-weight="500">F5</text>
+  <g transform="translate(390, 650)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#C9A962" stroke-width="2" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#C9A962" font-weight="500">F5</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
     <!-- 右側座位 - 新人 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#E8C4C4" stroke="#B76E79" stroke-width="1.5"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#8B4557" font-weight="bold">Mina</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#B8D4E8" stroke="#5B8FB9" stroke-width="1.5"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#3D6A8C" font-weight="bold">Justin</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#E8C4C4" stroke="#B76E79" stroke-width="1.5"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#8B4557" font-weight="bold">Mina</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#B8D4E8" stroke="#5B8FB9" stroke-width="1.5"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#3D6A8C" font-weight="bold">Justin</text>
   </g>
 
   <!-- F6 桌 (2人座) -->
-  <g transform="translate(605, 815)">
-    <rect x="0" y="0" width="50" height="40" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="25" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F6</text>
+  <g transform="translate(390, 745)">
+    <rect x="0" y="0" width="45" height="35" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="22" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F6</text>
     <!-- 座位 -->
-    <rect x="-45" y="5" width="40" height="30" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="24" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">王芊涵</text>
-    <rect x="55" y="5" width="40" height="30" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="24" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">薛宇翔</text>
+    <rect x="-40" y="4" width="35" height="27" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">王芊涵</text>
+    <rect x="50" y="4" width="35" height="27" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">薛宇翔</text>
   </g>
 
   <!-- 柱子 (F6-F7之間) -->
-  <rect x="715" y="870" width="25" height="25" rx="3" fill="#64748B" filter="url(#softShadow)"/>
-  <text x="727" y="887" text-anchor="middle" font-family="serif" font-size="10" fill="white">柱</text>
+  <rect x="478" y="790" width="22" height="22" rx="3" fill="#64748B" filter="url(#softShadow)"/>
+  <text x="489" y="805" text-anchor="middle" font-family="serif" font-size="9" fill="white">柱</text>
 
   <!-- F7 桌 (2人座) -->
-  <g transform="translate(605, 910)">
-    <rect x="0" y="0" width="50" height="40" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="25" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F7</text>
+  <g transform="translate(390, 825)">
+    <rect x="0" y="0" width="45" height="35" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="22" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F7</text>
     <!-- 座位 -->
-    <rect x="-45" y="5" width="40" height="30" rx="3" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <rect x="55" y="5" width="40" height="30" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="24" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">陳傑揚</text>
+    <rect x="-40" y="4" width="35" height="27" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">齊芸</text>
+    <rect x="50" y="4" width="35" height="27" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="21" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">陳傑揚</text>
   </g>
 
   <!-- F8 桌 (直立4人) -->
-  <g transform="translate(605, 965)">
-    <rect x="0" y="0" width="50" height="90" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
-    <text x="25" y="50" text-anchor="middle" font-family="serif" font-size="14" fill="#2C2C2C" font-weight="500">F8</text>
+  <g transform="translate(390, 875)">
+    <rect x="0" y="0" width="45" height="80" rx="4" fill="#FFFEF7" stroke="#2C2C2C" stroke-width="1.5" filter="url(#softShadow)"/>
+    <text x="22" y="44" text-anchor="middle" font-family="serif" font-size="12" fill="#2C2C2C" font-weight="500">F8</text>
     <!-- 左側座位 -->
-    <rect x="-45" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="-25" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">陳子維</text>
-    <rect x="-45" y="47" width="40" height="38" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
-    <text x="-25" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">朱阡毓</text>
+    <rect x="-40" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="-22" y="25" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">陳子維</text>
+    <rect x="-40" y="42" width="35" height="32" rx="3" fill="#40916C" stroke="#40916C" stroke-width="1"/>
+    <text x="-22" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">朱阡毓</text>
     <!-- 右側座位 -->
-    <rect x="55" y="5" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="28" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">馮宥霖</text>
-    <rect x="55" y="47" width="40" height="38" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
-    <text x="75" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">林名崎</text>
+    <rect x="50" y="5" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="25" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">馮宥霖</text>
+    <rect x="50" y="42" width="35" height="32" rx="3" fill="#5B8FB9" stroke="#5B8FB9" stroke-width="1"/>
+    <text x="67" y="62" text-anchor="middle" font-family="sans-serif" font-size="8" fill="white">林名崎</text>
   </g>
 
   <!-- ========== 出餐口 ========== -->
-  <rect x="340" y="1100" width="120" height="40" rx="8" fill="#A3B899" filter="url(#softShadow)"/>
-  <text x="400" y="1125" text-anchor="middle" font-family="serif" font-size="14" fill="white">出餐口</text>
+  <rect x="230" y="1020" width="120" height="35" rx="6" fill="#A3B899" filter="url(#softShadow)"/>
+  <text x="290" y="1043" text-anchor="middle" font-family="serif" font-size="13" fill="white">出餐口</text>
 
   <!-- ========== 圖例 ========== -->
-  <g transform="translate(50, 1130)">
-    <rect x="0" y="0" width="15" height="15" rx="2" fill="#40916C"/>
-    <text x="22" y="12" font-family="sans-serif" font-size="10" fill="#2C2C2C">Mina 賓客</text>
+  <g transform="translate(100, 1100)">
+    <rect x="0" y="0" width="14" height="14" rx="2" fill="#40916C"/>
+    <text x="20" y="11" font-family="sans-serif" font-size="10" fill="#2C2C2C">Mina 賓客</text>
 
-    <rect x="100" y="0" width="15" height="15" rx="2" fill="#5B8FB9"/>
-    <text x="122" y="12" font-family="sans-serif" font-size="10" fill="#2C2C2C">Justin 賓客</text>
+    <rect x="110" y="0" width="14" height="14" rx="2" fill="#5B8FB9"/>
+    <text x="130" y="11" font-family="sans-serif" font-size="10" fill="#2C2C2C">Justin 賓客</text>
 
-    <rect x="210" y="0" width="15" height="15" rx="2" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
-    <text x="232" y="12" font-family="sans-serif" font-size="10" fill="#2C2C2C">空位</text>
+    <rect x="230" y="0" width="14" height="14" rx="2" fill="#FFFEF7" stroke="#C9A9A6" stroke-width="1"/>
+    <text x="250" y="11" font-family="sans-serif" font-size="10" fill="#2C2C2C">空位</text>
   </g>
 
 </svg>
