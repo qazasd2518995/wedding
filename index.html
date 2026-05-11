@@ -594,7 +594,7 @@
 
         .pillar-1 { top: 410px; left: 50px; }
         .pillar-2 { top: 410px; right: 50px; }
-        .pillar-3 { top: 1050px; right: 50px; }
+        .pillar-3 { top: 920px; right: 50px; }
 
         .second-floor-entrance {
             top: 480px;
@@ -696,6 +696,12 @@
         .table-tiny {
             width: 65px;
             height: 45px;
+            border-radius: 6px;
+        }
+
+        .table-long {
+            width: 85px;
+            height: 120px;
             border-radius: 6px;
         }
 
@@ -1777,22 +1783,22 @@
                 { id: 'D3', name: 'D3', x: 620, y: 80, type: 'small', seats: createSeats(4, 'small'), zone: 'D' },
                 { id: 'D4', name: 'D4', x: 620, y: 220, type: 'small', seats: createSeats(4, 'small'), zone: 'D' },
 
-                // Q Zone - 4人座
-                { id: 'Q1', name: 'Q1', x: 160, y: 660, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
-                { id: 'Q2', name: 'Q2', x: 160, y: 790, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
-                { id: 'Q3', name: 'Q3', x: 160, y: 920, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
-                { id: 'Q4', name: 'Q4', x: 160, y: 1050, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
-                { id: 'Q5', name: 'Q5', x: 160, y: 1180, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
+                // Q Zone - Q1+Q2 緊鄰, Q3+Q4 緊鄰, Q5 獨立
+                { id: 'Q1', name: 'Q1', x: 160, y: 530, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
+                { id: 'Q2', name: 'Q2', x: 160, y: 585, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
+                { id: 'Q3', name: 'Q3', x: 160, y: 760, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
+                { id: 'Q4', name: 'Q4', x: 160, y: 815, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
+                { id: 'Q5', name: 'Q5', x: 160, y: 1000, type: 'small', seats: createSeats(4, 'small'), zone: 'Q' },
 
-                // F Zone
+                // F Zone - 全部 4人座
                 { id: 'F1', name: 'F1', x: 620, y: 500, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F2', name: 'F2', x: 620, y: 620, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
-                { id: 'F3', name: 'F3', x: 620, y: 720, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
+                { id: 'F2', name: 'F2', x: 620, y: 610, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F3', name: 'F3', x: 620, y: 720, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
                 { id: 'F4', name: 'F4', x: 620, y: 850, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F5', name: 'F5', x: 620, y: 980, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
-                { id: 'F6', name: 'F6', x: 620, y: 1080, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
-                { id: 'F7', name: 'F7', x: 620, y: 1180, type: 'tiny', seats: createSeats(2, 'tiny'), zone: 'F' },
-                { id: 'F8', name: 'F8', x: 620, y: 1280, type: 'small', seats: createSeats(4, 'small'), zone: 'F' }
+                { id: 'F5', name: 'F5', x: 620, y: 960, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F6', name: 'F6', x: 620, y: 1070, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F7', name: 'F7', x: 620, y: 1180, type: 'small', seats: createSeats(4, 'small'), zone: 'F' },
+                { id: 'F8', name: 'F8', x: 620, y: 1290, type: 'small', seats: createSeats(4, 'small'), zone: 'F' }
             ];
             autoSave();
         }
@@ -1821,6 +1827,11 @@
                     return [
                         { x: -55, y: 0 },
                         { x: 72, y: 0 }
+                    ];
+                case 'long':
+                    return [
+                        { x: -55, y: 5 }, { x: -55, y: 40 }, { x: -55, y: 75 }, { x: -55, y: 110 },
+                        { x: 92, y: 5 }, { x: 92, y: 40 }, { x: 92, y: 75 }, { x: 92, y: 110 }
                     ];
                 default:
                     return [];
