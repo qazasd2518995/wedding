@@ -1667,6 +1667,30 @@
         // Supabase sync functions
         async function saveToSupabase(data) {
             if (isSyncing) return;
+
+            // 保護機制：不要讓空的座位資料覆蓋 Supabase
+            const hasSeatedGuests = data.guests && data.guests.some(g => g.tableId !== null);
+            const hasOccupiedSeats = data.tables && data.tables.some(t =>
+                t.seats && t.seats.some(s => s.guest !== null)
+            );
+
+            // 如果本地完全沒有座位分配，先檢查遠端是否有資料
+            if (!hasSeatedGuests && !hasOccupiedSeats) {
+                try {
+                    const remoteData = await loadFromSupabase();
+                    const remoteHasSeats = remoteData && remoteData.guests &&
+                        remoteData.guests.some(g => g.tableId !== null);
+                    if (remoteHasSeats) {
+                        console.warn('Blocked: refusing to overwrite remote data with empty seating');
+                        return; // 不要用空資料覆蓋有座位的資料
+                    }
+                } catch (e) {
+                    // 無法檢查遠端，保守起見不上傳
+                    console.warn('Cannot verify remote data, skipping upload');
+                    return;
+                }
+            }
+
             try {
                 await db
                     .from('seating_data')
@@ -2294,10 +2318,23 @@
 
         // Reset all data
         function resetData() {
-            if (confirm('確定要重置所有資料嗎？這會清除所有座位安排並重新載入預設賓客名單。')) {
+            // 兩階段確認，防止誤按
+            if (!confirm('⚠️ 警告：這會清除所有座位安排！\n\n確定要重置嗎？')) {
+                return;
+            }
+            if (!confirm('🚨 最後確認：所有座位資料將會永久消失！\n\n請輸入「確定」後按確認繼續。\n\n真的要重置嗎？')) {
+                return;
+            }
+
+            // 在重置前，先從 Supabase 刪除資料
+            db.from('seating_data').delete().eq('id', 'main').then(() => {
                 localStorage.removeItem(STORAGE_KEY);
                 location.reload();
-            }
+            }).catch(e => {
+                console.error('Failed to clear Supabase:', e);
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            });
         }
 
         // Mobile sidebar toggle
@@ -2346,21 +2383,57 @@
 
         // Initialize with Supabase
         async function init() {
-            // First, ensure we have tables initialized
-            initializeTables();
+            // 載入本地資料
+            const localData = loadState();
+            const localHasSeats = localData.guests && localData.guests.some(g => g.tableId !== null);
 
-            // Then try to load from Supabase
+            // 嘗試載入 Supabase 資料
+            let remoteData = null;
             try {
-                const remoteData = await loadFromSupabase();
-                if (remoteData && remoteData.tables && remoteData.tables.length > 0) {
-                    state.tables = remoteData.tables;
-                    state.guests = remoteData.guests || defaultState.guests;
-                    state.groups = remoteData.groups || defaultState.groups;
-                    state.zoom = remoteData.zoom || 1;
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
-                }
+                remoteData = await loadFromSupabase();
             } catch (e) {
-                console.log('Using local data, Supabase sync will retry later');
+                console.log('Supabase load failed, using local data');
+            }
+
+            const remoteHasSeats = remoteData && remoteData.guests &&
+                remoteData.guests.some(g => g.tableId !== null);
+
+            // 決定使用哪份資料（優先使用有座位分配的資料）
+            if (remoteHasSeats && !localHasSeats) {
+                // 遠端有座位，本地沒有 → 用遠端
+                console.log('Using remote data (has seating assignments)');
+                state.tables = remoteData.tables;
+                state.guests = remoteData.guests;
+                state.groups = remoteData.groups || defaultState.groups;
+                state.zoom = remoteData.zoom || 1;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+            } else if (localHasSeats && !remoteHasSeats) {
+                // 本地有座位，遠端沒有 → 用本地並同步到遠端
+                console.log('Using local data (has seating assignments), syncing to remote');
+                state = localData;
+                saveToSupabase({
+                    groups: state.groups,
+                    guests: state.guests,
+                    tables: state.tables,
+                    zoom: state.zoom
+                });
+            } else if (remoteData && remoteData.tables && remoteData.tables.length > 0) {
+                // 兩邊都有或都沒有座位，優先用遠端（多裝置同步）
+                console.log('Using remote data (sync priority)');
+                state.tables = remoteData.tables;
+                state.guests = remoteData.guests || defaultState.guests;
+                state.groups = remoteData.groups || defaultState.groups;
+                state.zoom = remoteData.zoom || 1;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+            } else {
+                // 都沒資料，初始化新桌子
+                console.log('No existing data, initializing tables');
+                initializeTables();
+            }
+
+            // 確保桌子已初始化
+            if (!state.tables || state.tables.length === 0) {
+                initializeTables();
             }
 
             renderAll();
